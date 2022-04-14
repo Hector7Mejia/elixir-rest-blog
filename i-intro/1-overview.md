@@ -14,7 +14,7 @@ primarily be looking at the web portion of the framework. We will be using
 
 **Understand:**
 
-- What is a framework and how the Spring Framework helps our development process
+- What is a framework and how the Spring Framework helps our devlopment process
 
 
 - Different web application architectures and patterns
