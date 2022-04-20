@@ -1,13 +1,17 @@
 package com.example.restblog.data;
+
 import lombok.*;
+
+import java.util.Collection;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class Post {
+public class Category {
     private Long id;
-    private String title;
-    private String content;
+    private String name;
+    private Collection<Post> posts;
 }
+

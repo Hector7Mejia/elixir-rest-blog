@@ -1,4 +1,5 @@
 import Home from "./views/Home.js";
+import {PostsEvent} from "./views/PostIndex.js";
 import PostIndex from "./views/PostIndex.js";
 import About from "./views/About.js";
 import Error404 from "./views/Error404.js";
@@ -7,6 +8,8 @@ import Login from "./views/Login.js";
 import LoginEvent from "./auth.js";
 import Register from "./views/Register.js"
 import {RegisterEvent} from "./views/Register.js";
+import UserIndex from "./views/User.js";
+import {UserEvents} from "./views/User.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -42,6 +45,16 @@ export default function router(URI) {
             },
             uri: '/posts',
             title: 'All Posts',
+            viewEvent: PostsEvent
+        },
+        '/users': {
+            returnView: UserIndex,
+            state: {
+                users: "/api/users/username?userName=bob-smith"
+            },
+            uri: '/users',
+            title: 'User Info',
+            viewEvent: UserEvents
         },
         '/about': {
             returnView: About,
