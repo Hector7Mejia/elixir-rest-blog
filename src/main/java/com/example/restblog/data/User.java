@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.management.relation.Role;
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -19,4 +20,6 @@ public class User {
     private String password;
     private LocalDate createdAt;
     private Role role;
+    Collection<Post> posts;
+
 }
