@@ -23,7 +23,8 @@ public class Post {
     private String content;
 
     @ManyToOne
-    @JsonIgnoreProperties({"post", "password"})
+    @JoinColumn(name="author_id")
+    @JsonIgnoreProperties({"posts", "password"})
     private User author;
 
 
@@ -39,6 +40,6 @@ public class Post {
         foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
         inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
 )
-@JsonIgnoreProperties("categories")
+@JsonIgnoreProperties("posts")
 private Collection<Category> categories;
 }

@@ -29,6 +29,7 @@ public class User {
     private String password;
     @Column
     private LocalDate createdAt;
+
     @NonNull
     @Enumerated(EnumType.STRING)
     private Role role;
