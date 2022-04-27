@@ -1,5 +1,5 @@
 import CreateView from "../createView.js"
-
+import {getHeaders} from "../auth.js";
 export default function Register(props) {
     return `
     <!DOCTYPE html>
@@ -26,6 +26,7 @@ export default function Register(props) {
 }
 
 export function RegisterEvent(){
+    console.log()
     $("#register-btn").click(function(){
 
         let newUser = {
@@ -38,7 +39,7 @@ export function RegisterEvent(){
 
         let request = {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: getHeaders(),
             body: JSON.stringify(newUser)
         }
 

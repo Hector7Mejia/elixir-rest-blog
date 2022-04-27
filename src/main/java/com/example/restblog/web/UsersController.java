@@ -4,8 +4,10 @@ package com.example.restblog.web;
 import com.example.restblog.data.PostsRepository;
 import com.example.restblog.data.User;
 import com.example.restblog.data.UsersRepository;
+import com.example.restblog.security.OAuthConfiguration;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -44,7 +46,8 @@ public class UsersController {
 
     @GetMapping("email")
     public User getByEmail(@RequestParam String email) {
-return usersRepository.findByEmail(email);    }
+return usersRepository.findByEmail(email);
+    }
 
 //    @GetMapping("/username")
 //    public User getByUserName(@RequestParam String userName){
@@ -64,6 +67,11 @@ return usersRepository.findByEmail(email);    }
 
 //        System.out.println("Ready to add post" + newPost);
     }
+@GetMapping("me")
+private User getMyInfo(OAuth2Authentication auth) {
+        String email = auth.getName();
+        return usersRepository.findByEmail(email);
+}
 
 
     @PutMapping("{userId}")

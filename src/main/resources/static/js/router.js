@@ -1,4 +1,4 @@
-import Home from "./views/Home.js";
+import Home, {HomeEvent} from "./views/Home.js";
 import {PostsEvent} from "./views/PostIndex.js";
 import PostIndex from "./views/PostIndex.js";
 import About from "./views/About.js";
@@ -10,6 +10,7 @@ import Register from "./views/Register.js"
 import {RegisterEvent} from "./views/Register.js";
 import UserIndex from "./views/User.js";
 import {UserEvents} from "./views/User.js";
+import Logout, {LogoutEvents} from "./views/Logout.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -18,11 +19,13 @@ import {UserEvents} from "./views/User.js";
  */
 export default function router(URI) {
     const routes = {
-        '/Home': {
+        '/': {
             returnView: Home,
             state: {},
             uri: '/home',
             title: 'Home',
+            viewEvent: HomeEvent
+
         },
         '/login': {
             returnView: Login,
@@ -50,11 +53,18 @@ export default function router(URI) {
         '/users': {
             returnView: UserIndex,
             state: {
-                users: "/api/users/2"
+                users: "/api/users/me"
             },
             uri: '/users',
             title: 'User Info',
             viewEvent: UserEvents
+        },
+        '/logout': {
+            returnView: Logout,
+            state: {},
+            uri: '/',
+            title: 'Logout',
+            viewEvent: LogoutEvents
         },
         '/about': {
             returnView: About,

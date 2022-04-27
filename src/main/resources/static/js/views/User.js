@@ -1,4 +1,3 @@
-import CreateView from "../createview.js";
 import createView from "../createview.js";
 
 export default function UserIndex(props) {
