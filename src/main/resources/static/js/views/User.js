@@ -1,4 +1,5 @@
 import createView from "../createview.js";
+import {getHeaders} from "../auth.js";
 
 export default function UserIndex(props) {
     return `
@@ -29,7 +30,8 @@ export function UserEvents() {
 
         // 2. assemble the request
         const request = {
-            method: "PUT"
+            method: "PUT",
+            headers: getHeaders()
         }
 
 

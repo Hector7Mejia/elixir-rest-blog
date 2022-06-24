@@ -45,7 +45,7 @@ public class PostsController {
         String email = auth.getName();
         User user = userRepository.findByEmail(email);
         newPost.setAuthor(user);
-        System.out.println(newPost);
+//        System.out.println(newPost);
         postsRepository.save(newPost);
         emailService.prepareAndSend(newPost,"subject","test body");
 //        passwordEncoder
@@ -76,6 +76,8 @@ public class PostsController {
     @DeleteMapping("{postId}")
     private void deletePost(@PathVariable Long postId) {
         System.out.println("ready to delete post." + postId);
+        Post postToDelete = postsRepository.getById(postId);
+        postsRepository.delete(postToDelete);
     }
 
 

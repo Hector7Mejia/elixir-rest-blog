@@ -10,6 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -56,7 +58,7 @@ return usersRepository.findByEmail(email);
 //        return user;
 //    }
 
-    @PostMapping
+    @PostMapping("create")
     private void createUser(@RequestBody User newUser) {
         newUser.setCreatedAt(LocalDate.now());
         newUser.setRole(User.Role.USER);
@@ -74,20 +76,24 @@ private User getMyInfo(OAuth2Authentication auth) {
 }
 
 
-    @PutMapping("{userId}")
-    private void updateUser(@PathVariable Long userId, @RequestBody User newUser) {
-        System.out.println("Ready to update post" + userId + newUser);
-    }
-
-//    @PutMapping("{id}/updatePassword")
-//    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
-//        User user = new User(id,"user 1", "email", "1111", null, User.Role.USER);
-//        System.out.println("Changing password to " + newPassword);
+//    @PutMapping("{userId}")
+//    private void updateUser(@PathVariable Long userId, @RequestBody User newUser) {
+//        System.out.println("Ready to update post" + userId + newUser);
 //    }
 
-    @DeleteMapping("{userId}")
-    private void deleteUser(@PathVariable Long userId) {
-        System.out.println("Deleted post" + userId);
+    @PutMapping("{id}/updatePassword")
+    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
+       User userToUpdatePassword = usersRepository.findById(id).get();
+        String encryptedPassword = userToUpdatePassword.getPassword();
+        encryptedPassword = passwordEncoder.encode(encryptedPassword);
+        userToUpdatePassword.setPassword(encryptedPassword);
+        usersRepository.save(userToUpdatePassword);
+        System.out.println("Changing password to " + newPassword);
     }
+
+//    @DeleteMapping("{userId}")
+//    private void deleteUser(@PathVariable Long userId) {
+//        System.out.println("Deleted post" + userId);
+//    }
 
 }

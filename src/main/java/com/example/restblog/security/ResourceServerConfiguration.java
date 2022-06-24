@@ -33,8 +33,11 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/api/users/**")
-                        .hasAnyAuthority("ADMIN", "USER")
+
+                .antMatchers("/api/users/create")
+                .permitAll()
+                .antMatchers("/api/users/**")
+                .hasAnyAuthority("ADMIN", "USER")
                     .antMatchers("/api/posts/**")
                         .hasAnyAuthority("ADMIN", "USER")
                     .antMatchers("/swagger-ui/**", "/v3/api-docs/**")
